@@ -1,1 +1,10 @@
 Station Count: <%= @stations.count %>
+
+<% @stations.each do |station| %>
+  <h3>Station Name: <%= station[:station_name] %></h3>
+  Address: <%= station[:street_address] %><br>
+  Fuel Types: <%= station[:fuel_type_code] %><br>
+  Distance: <%= station[:distance] %><br>
+  Access Times: <%= station[:access_days_time] %>
+  <br>
+<% end %>
