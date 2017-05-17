@@ -2,11 +2,23 @@ class NrelService
   attr_reader :connection
 
   def initialize
-    @connection = Faraday.new("https://developer.nrel.gov/api/alt-fuel-stations/v1/")
+    @connection = Faraday.new("https://developer.nrel.gov/")
   end
 
   def stations(location)
-    require "pry"; binding.pry
-    connection.get('location', location)
+    a = parse(connection.get('api/alt-fuel-stations/v1/nearest',
+                  { location: location,
+                    radius: '6.0',
+                    api_key: ENV['nrel_api_key'],
+                    format: 'json',
+                    limit: '10' }))
+                    require "pry"; binding.pry
+
+  end
+
+  private
+
+  def parse(response)
+    JSON.parse(response.body, symbolize_names: true)
   end
 end
