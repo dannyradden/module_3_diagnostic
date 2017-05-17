@@ -6,14 +6,13 @@ class NrelService
   end
 
   def stations(location)
-    a = parse(connection.get('api/alt-fuel-stations/v1/nearest',
-                  { location: location,
-                    radius: '6.0',
-                    api_key: ENV['nrel_api_key'],
-                    format: 'json',
-                    limit: '10' }))
-                    require "pry"; binding.pry
-
+    parse(connection.get('api/alt-fuel-stations/v1/nearest',
+                        { location: location,
+                          radius: '6.0',
+                          api_key: ENV['nrel_api_key'],
+                          format: 'json',
+                          limit: '10',
+                          fuel_type: 'LPG,ELEC' }))[:fuel_stations]
   end
 
   private

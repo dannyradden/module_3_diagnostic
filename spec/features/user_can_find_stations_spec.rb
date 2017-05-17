@@ -2,13 +2,10 @@ require 'rails_helper'
 
 describe 'Dashboard' do
   it 'User can find nearest stations' do
-    user = User.new(token: ENV["nrel_api_key"])
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-
-    visit dashboard_index_path
+    visit root_path
 
     fill_in 'zip_code', with: '80203'
-    click_on 'locate'
+    click_on 'Locate'
 
     expect(page).to have_current_path(search_path(location: '80203'))
     expect(page).to have_content 'Station Count: 10'
