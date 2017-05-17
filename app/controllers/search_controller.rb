@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
   def index
-    require "pry"; binding.pry
+    service = NrelService.new
+    @stations = service.stations(params[:q])
   end
 end

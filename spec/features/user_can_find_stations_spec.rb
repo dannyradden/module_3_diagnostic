@@ -4,10 +4,10 @@ describe 'Dashboard' do
   it 'User can find nearest stations' do
     visit root_path
 
-    fill_in 'zip_code', with: '80203'
+    fill_in :q, with: '80203'
     click_on 'Locate'
 
-    expect(page).to have_current_path(search_path(location: '80203'))
+    expect(page).to have_current_path('/search?utf8=✓&q=80203&commit=Locate', url: true)
     expect(page).to have_content 'Station Count: 10'
 
   # Then I should be on page "/search" with parameters visible in the url
